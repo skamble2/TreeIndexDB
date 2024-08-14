@@ -29,25 +29,25 @@
 To install and set up TreeIndexDB, follow these steps:
 
 1. Clone the repository:
-   \`\`\`bash
-   git clone https://github.com/your-repo/TreeIndexDB.git
+   ```bash
+   git clone https://github.com/TreeIndexDB.git
    cd TreeIndexDB
-   \`\`\`
+   ```
 
 2. Compile the code using `make`:
-   \`\`\`bash
+   ```bash
    make
-   \`\`\`
+   ```
 
 3. Run the program:
-   \`\`\`bash
+   ```bash
    make run
-   \`\`\`
+   ```
 
 4. Clean up binary files and objects:
-   \`\`\`bash
+   ```bash
    make clean
-   \`\`\`
+   ```
 
 ## Usage
 
