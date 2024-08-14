@@ -1,0 +1,113 @@
+/**********************************************************************************************************************
+ * File Name: Readme.txt
+ *
+ * Description:
+ *		This file contains the information about the functions definition in the btree_mgr.c file.
+ *
+ * Return:
+ *		A better understanding of the assignment.
+ *
+ * Author:
+ *		Karan Batra <kbatra3@hawk.iit.edu> (A20518491)
+ *
+ * History:
+ *		Date        Name                                                Content
+ *		----------  ------------------------------------------------  ------------------------
+ *		4/15/2023   Karan Batra <kbatra3@hawk.iit.edu> (A20518491)     
+ *		4/16/2023	Soham Kamble <skamble2@hawk.iit.edu> (A20517098)   
+ *		4/16/2023   Leily Nourbakhsh <snoorbakhsh@hawk.iit.edu> (A20516826)  
+ **********************************************************************************************************************/
+
+----------------------------------------------------------
+How to run
+----------------------------------------------------------
+
+1. Open terminal and Clone from Github to the required location.
+
+2. Navigate to assign4 folder.
+
+3. Use make command to execute the Makefile, type make
+
+4. Use make run to run test_assign4_1.c 
+
+5. Use make run1 to run test_expr.c
+
+6. Use make clean to delete the binary files
+
+----------------------------------------------------------
+init and shutdown index manager
+----------------------------------------------------------
+1. initIndexManager(...)
+This function is used to initialize the index manager
+
+2. shutdownIndexManager(...)
+This function is used to shut down the index manager
+
+----------------------------------------------------------
+create, destroy, open, and close an btree index
+----------------------------------------------------------
+1. createBtree(...)
+This will create a new btree with the given index id
+It will validate the node and returns the error is the size of the node is larger than the maximum allowed size
+The program writes the original B+ tree index header to the first page of the index file and returns RC_OK if the operation succeeds. Otherwise, an error code is returned.
+
+2. openBtree(...)
+The function creates a new BTreeHandle object and a BM_BufferPool object to manage buffer pages. 
+The function reads the metadata of the B-tree from the first page of the index file and sets the corresponding fields in the BTreeHandle object. 
+The function then calls the loadBtree function to load the nodes of the B-tree into memory, and returns a pointer to the BTreeHandle object.
+
+3. closeBtree(...)
+The function takes a BTreeHandle pointer as input and frees up the resources that were allocated for it during its lifetime.
+The function first shuts down the buffer pool that was used to manage the pages of the B-Tree.
+It then recursively frees up all the nodes of the B-Tree, starting from the root node.
+
+4. deleteBtree(...)
+It takes in the file path of the index file as a parameter and checks if it exists or not using the access() function.
+If the file exists, it deletes the file from the file system using the unlink() function.
+
+----------------------------------------------------------
+Access Information
+----------------------------------------------------------
+1. getNumNodes(...)
+This function returns the number of nodes in the B-tree specified by the given BTreeHandle.
+
+2. getNumEntries(...)
+The getNumEntries function sets the value of the number of entries in the B+ tree to the result variable and returns RC_OK. 
+
+3. getKeyType(...)
+The getKeyType function sets the value of the key type of the B+ tree to the result variable and returns RC_OK.
+
+----------------------------------------------------------
+Index access
+----------------------------------------------------------
+1. findKey(...)
+It uses the given key to locate the leaf node and perform a binary search on its values ​​array to obtain the key index.
+If a key is found, return the corresponding RID, otherwise return an error.
+
+2. insertKey(...)
+The function finds the node to insert the key into based on its value.
+If the node is full, it creates a new node and redistributes the keys.
+Finally, the function updates the B+ tree header and returns an appropriate status code.
+
+3. deleteKey(...)
+Search for the leaf node containing the key to be removed. 
+Once the key is found, extract it and its corresponding RIDs from the leaf node. 
+Update the write size in the tree, writing the modified leaf node and the tip of the B-tree back to disk.
+
+4. openTreeScan(...)
+This function is used to open the scanner to scan the tree
+
+5. nextEntry(...)
+It checks if the current node is exhausted and moves to the next node if necessary.
+It returns the RID of the next entry.
+It updates the scan state for the next call to nextEntry.
+
+6. closeTreeScan(...)
+This function is used to close a B+ tree scan by freeing up the memory allocated for the scan management information and the scan handle. 
+
+----------------------------------------------------------
+Debug and test functions
+----------------------------------------------------------
+1. printTree(...)
+This function prints the B+ Tree structure in a human-readable format.
+It uses a recursive helper function to traverse the tree and concatenate the output into a string.
